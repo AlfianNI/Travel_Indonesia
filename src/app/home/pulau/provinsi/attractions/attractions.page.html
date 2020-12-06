@@ -8,5 +8,14 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngFor="let attr of attraction">
+        <ion-item *ngIf="attr.provId.includes(loaded.provId)">
+            <ion-title>
+                {{attr.nama}}
+            </ion-title>
+            <ion-text class="item-text-wrap">
+                {{attr.desc}}
+            </ion-text>
+        </ion-item>
+    </ion-list>
 </ion-content>

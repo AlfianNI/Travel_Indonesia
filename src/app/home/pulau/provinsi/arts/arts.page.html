@@ -8,5 +8,14 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngFor="let arts of arts">
+        <ion-item *ngIf="arts.provId.includes(loaded.provId)">
+            <ion-title>
+                {{arts.nama}}
+            </ion-title>
+            <ion-text class="item-text-wrap">
+                {{arts.desc}}
+            </ion-text>
+        </ion-item>
+    </ion-list>
 </ion-content>

@@ -13,6 +13,7 @@
             <ion-title>
                 {{food.nama}}
             </ion-title>
+            <ion-button slot="end" [routerLink]="['./',food.fId]">Location</ion-button>
             <ion-text class="item-text-wrap">
                 {{food.desc}}
             </ion-text>

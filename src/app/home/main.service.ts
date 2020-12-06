@@ -97,36 +97,60 @@ private prov:provinsi[]=[{
 }];
 
 private food:food[]=[{
+  fId:'f121',
   provId:'pr12',
   nama:'Makanan 1 SumBarat',
-  desc:'Lorem Ipsum'
+  desc:'Lorem Ipsum',
+  loc:{
+    lat : -123,
+    lng : 123
+  }
  },{
+  fId:'f122',
   provId:'pr12',
   nama:'Makanan 2 Sumbar',
-  desc:'Lorem Ipsum'
+  desc:'Lorem Ipsum',
+  loc:{
+    lat : -123,
+    lng : 123
+  }
  },{
+    fId:'f111',
    provId:'pr11',
    nama:'Makanana Aceh 1',
-   desc:'Dorime Ameno'
+   desc:'Dorime Ameno',
+   loc:{
+    lat : -123,
+    lng : 123
+  }
  },{
+  fId:'f211',
    provId:'pr21',
    nama:'Makanan Banten 1',
-   desc:'Dorime Ameno'
+   desc:'Dorime Ameno',
+   loc:{
+    lat : -123,
+    lng : 123
+  }
  }]
 
  private attract:attraction[]=[{
+   aId:'a111',
    provId:'pr11',
    nama:'Attraction Sumbar 1',
    desc:'Dorime Ameno'
  },{
+  aId:'a112',
    provId:'pr11',
    nama:'Attraction Sumbar 2',
    desc:'Dorime Ameno'
  },{
+  aId:'a121',
    provId:'pr12',
    nama:'Attraction Aceh 1',
    desc:'Dorime Ameno'
  },{
+  aId:'a211',
    provId:'pr21',
    nama:'Attraction Banten',
    desc:'Dorime'
@@ -166,6 +190,10 @@ private food:food[]=[{
 
   getProv(provId: string){
     return this.prov.find(prov => prov.provId === provId);
+  }
+
+  getFoods(fId:string){
+    return this.food.find(food => food.fId === fId);
   }
 
   getAllFoods(){
