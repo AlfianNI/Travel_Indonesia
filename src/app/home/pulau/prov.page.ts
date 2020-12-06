@@ -24,7 +24,16 @@ export class ProvPage implements OnInit {
       const id = paramMap.get('pulauId');
       this.loaded = this.mainSrv.getPulau(id);
       this.prov = this.mainSrv.getAllProv();
+      this.pulau = this.mainSrv.getAllPulau();
     });
+  }
+
+  movePulau(pulau:pulau){
+    this.router.navigate(['home/',pulau.pulauId]);
+  }
+
+  toHome(){
+    this.router.navigate(['home/']);
   }
 
 }

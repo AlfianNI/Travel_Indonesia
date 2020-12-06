@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/home"></ion-back-button>
+            <ion-back-button (click)="toHome()"></ion-back-button>
         </ion-buttons>
         <ion-title>Discover {{loaded.nama}}</ion-title>
     </ion-toolbar>
@@ -16,7 +16,12 @@
     </ion-list>
     <ion-title>Popular Attraction</ion-title>
     <ion-title>See Beauty on Another Island</ion-title>
-    <ion-list>
-        <ion-button *ngFor="let pulau of pulau" [routerLink]="[pulau.pulauId]">{{pulau.nama}}</ion-button>
-    </ion-list>
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false}">
+        <ion-slide *ngFor="let pulau of pulau" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
+            <ion-col>
+                <ion-button (click)="movePulau(pulau)">{{ pulau.nama }}</ion-button>
+                <ion-img style="pointer-events:none" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
+            </ion-col>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

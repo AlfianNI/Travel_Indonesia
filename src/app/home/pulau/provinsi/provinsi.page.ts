@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../../main.service';
 import { provinsi, pulau } from '../../pulau';
 
@@ -9,19 +9,27 @@ import { provinsi, pulau } from '../../pulau';
   styleUrls: ['./provinsi.page.scss'],
 })
 export class ProvinsiPage implements OnInit {
-  loaded;
-  allProv;
+  loaded:provinsi;
+  prov;
   constructor(private activatedRoute:ActivatedRoute,
-    private mainSrv:MainService) { }
+    private mainSrv:MainService,private router:Router) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('provId')){return;}
       const id = paramMap.get('provId');
       this.loaded = this.mainSrv.getProv(id);
-      this.allProv = this.mainSrv.getAllProv();
+      this.prov = this.mainSrv.getAllProv();
   
     });
+  }
+
+  moveProv(prov:any){
+    this.router.navigate(['home/',this.loaded.pulauId,prov]);
+  }
+
+  toPulau(){
+    this.router.navigate(['home/',this.loaded.pulauId]);
   }
 
 }
