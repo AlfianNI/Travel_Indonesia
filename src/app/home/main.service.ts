@@ -97,15 +97,15 @@ private prov:provinsi[]=[{
 }];
 
 private food:food[]=[{
-  provId:'pr11',
-  nama:'Makanan 1 Sumatra Barat',
+  provId:'pr12',
+  nama:'Makanan 1 SumBarat',
   desc:'Lorem Ipsum'
  },{
-  provId:'pr11',
+  provId:'pr12',
   nama:'Makanan 2 Sumbar',
   desc:'Lorem Ipsum'
  },{
-   provId:'pr12',
+   provId:'pr11',
    nama:'Makanana Aceh 1',
    desc:'Dorime Ameno'
  },{
@@ -179,6 +179,7 @@ private food:food[]=[{
   getAllArts(){
     return this.art;
   }
+
 
   
 

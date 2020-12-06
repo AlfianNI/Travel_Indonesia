@@ -1,15 +1,9 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
-            Home
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-    <p>As the Largest archipelagic country in the world. Indonesia is blessed with so many differen people, cultures, custom, traditions, artworks, food, animals, plants and landscapes</p>
-    <ion-title>Where Are You Going?</ion-title>
-    <ion-list>
-        <ion-button *ngFor="let pulau of pulau" [routerLink]="['./',pulau.pulauId]">{{pulau.nama}}</ion-button>
-    </ion-list>
-</ion-content>
+    <ion-content [fullscreen]="true">
+        <p>As the Largest archipelagic country in the world. Indonesia is blessed with so many differen people, cultures, custom, traditions, artworks, food, animals, plants and landscapes</p>
+        <ion-title>Where Are You Going?</ion-title>
+        <ion-list>
+            <ion-button *ngFor="let pulau of pulau" [routerLink]="['./',pulau.pulauId]">{{pulau.nama}}</ion-button>
+        </ion-list>
+    </ion-content>

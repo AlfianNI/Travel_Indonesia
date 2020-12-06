@@ -3,33 +3,44 @@
         <ion-buttons slot="start">
             <ion-back-button (click)="toPulau()"></ion-back-button>
         </ion-buttons>
-        <ion-title>What's On {{loaded.nama}}</ion-title>
+
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <p>{{loaded.desc}}</p>
-    <ion-list>
-        <ion-item>
-            <ion-button routerLink="./foods">
-                Foods
-            </ion-button>
-            <ion-button routerLink="./attractions">
-                Places
-            </ion-button>
-            <ion-button routerLink="./arts">
-                Arts
-            </ion-button>
-        </ion-item>
-    </ion-list>
+    <ion-title>What's On {{loaded.nama}}</ion-title>
+    <ion-card>{{loaded.desc}}</ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px;" routerLink="./foods">
+                    Foods
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px" routerLink="./attractions">
+                    Places
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px" routerLink="./arts">
+                    Arts
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+
+
     <ion-title>
         Discover More
     </ion-title>
     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false}">
-        <ion-slide *ngFor="let prov of prov" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
-            <ion-col *ngIf="prov.pulauId === loaded.pulauId">
-                <ion-button (click)="moveProv(prov.provId)">{{ prov.nama }}</ion-button>
-                <ion-img style="pointer-events:none" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
+        <ion-slide *ngFor="let prov of prov" style="width: 150px; height: 400px; border: 2px solid #f8f8f8">
+            <ion-col *ngIf="prov.pulauId.includes(loaded.pulauId)">
+                <ion-button expand="full" (click)="moveProv(prov.provId)">{{ prov.nama }}</ion-button>
+                <ion-img expand="full" style="width: 150px;height: 350px;pointer-events:none" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
             </ion-col>
         </ion-slide>
     </ion-slides>
