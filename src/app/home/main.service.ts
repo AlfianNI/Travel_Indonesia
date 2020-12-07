@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { arts, attraction, food, provinsi, pulau } from './pulau';
+import {map,take} from 'rxjs/operators'
+import {AngularFirestoreCollection,AngularFirestore,DocumentReference} from '@angular/fire/firestore'
 
 @Injectable({
   providedIn: 'root'
@@ -173,8 +176,12 @@ private food:food[]=[{
    nama:'Seni Budaya Banten',
    desc:'Dorime'
  }];
+ private pulauCollect:AngularFirestoreCollection<pulau>;
 
-  constructor() { }
+ constructor(private afs:AngularFirestore) {
+  //Pulau
+  this.pulauCollect = this.afs.collection<pulau>('pulau');
+ }
 
   getAllPulau(){
     return this.pulau;
