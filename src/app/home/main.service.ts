@@ -8,71 +8,7 @@ import {AngularFirestoreCollection,AngularFirestore,DocumentReference} from '@an
   providedIn: 'root'
 })
 export class MainService {
-//   private pulau:pulau[]=[{
-//     pulauId:'p01',
-//     nama:'Sumatra',
-//     provinsi:[
-//       {
-//         provId:'pr11',
-//         nama:'Sumatra Barat',
-//         desc:'Lorem Ipsum Blablabla',
-//         food:[{
-//           nama:'Makanan 1 Sumatra Barat',
-//           desc:'Lorem Ipsum'
-//         },{
-//           nama:'Makanan 2 Sumbar',
-//           desc:'Lorem Ipsum'
-//         }],
-//         attraction:[{
-//           nama:'Attraction 1 Sumbar',
-//           desc:'Lorem Ipsum'
-//         }],
-//         arts:[{
-//           nama:'Seni Budaya 1 Sumbar',
-//           desc:'Lorem Ipsum'
-//         }]
-//       },
-//       {
-//         provId:'pr12',
-//         nama:'Aceh',
-//         desc:'Dorime Ameno',
-//         food:[{
-//           nama:'Makanan Aceh 1',
-//           desc:'Dorime'
-//         }],
-//         attraction:[{
-//           nama:'Attraction Aceh 1',
-//           desc:'Dorime'
-//         }],
-//         arts:[{
-//           nama:'Seni Budaya Aceh 1',
-//           desc:'Dorime Ameno'
-//         }]
-//       }
-//     ]
-//   },{
-//     pulauId:'p02',
-//     nama:'Jawa',
-//     provinsi:[{
-//       provId:'pr21',
-//       nama:'Banten',
-//       desc:'Dorime Ameno',
-//       food:[{
-//         nama:'Makanan Banten 1',
-//         desc:'Dorime Ameno'
-//       }],
-//       attraction:[{
-//         nama:'Attraction Banten 1',
-//         desc:'Dorime Ameno'
-//       }],
-//       arts:[{
-//         nama:'Seni Budaya Banten',
-//         desc:'Dorime Ameno'
-//       }]
-//     }]
-//   }
-// ];
-
+  
 private pulau:pulau[]=[{
   pulauId:'p01',
   nama:'Sumatra',
@@ -182,6 +118,18 @@ private food:food[]=[{
   //Pulau
   this.pulauCollect = this.afs.collection<pulau>('pulau');
  }
+
+ listPulau(): Observable<pulau[]> {
+  return this.pulauCollect.snapshotChanges().pipe(
+      map(changes => {
+          return changes.map(a => {
+              const data = a.payload.doc.data();
+              data.id = a.payload.doc.id;
+              return data;
+          });
+      })
+  );
+}
 
   getAllPulau(){
     return this.pulau;

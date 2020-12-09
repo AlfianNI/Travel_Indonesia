@@ -28,7 +28,7 @@ export class MapsPage implements OnInit {
   ionViewDidEnter(){
     this.showMap(this.loaded.loc);
   }
-
+  
   showMap(pos:any){
     const location = new google.maps.LatLng(pos.lat,pos.lng);
     console.log(pos);
