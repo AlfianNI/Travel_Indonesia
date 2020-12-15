@@ -1,7 +1,8 @@
-import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { MainService } from 'src/app/home/main.service';
-import { food } from 'src/app/home/pulau';
+import { food, loca } from 'src/app/home/pulau';
 
 declare var google:any;
 
@@ -11,37 +12,56 @@ declare var google:any;
   styleUrls: ['./maps.page.scss'],
 })
 export class MapsPage implements OnInit {
-  loaded:food;
+  fsLoaded:food;
   map:any;
+  loca:loca;
   @ViewChild('map',{read:ElementRef,static:false}) mapRef:ElementRef;
+  umnPos:loca = {
+    lat:5.8911067,
+    lng:95.3207733
+  };
+  
 
-  constructor(private mainSrv:MainService,private activatedRoute:ActivatedRoute) { }
+  constructor(private navCtrl:NavController,private activatedRoute:ActivatedRoute,private mainSrv:MainService) { }
 
   ngOnInit() {
+    let id = this.activatedRoute.snapshot.paramMap.get('fId');
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('fId')){return;}
       const id = paramMap.get('fId');
-      this.loaded = this.mainSrv.getFoods(id);
+      this.mainSrv.listaFood(id).subscribe(food=>{
+        this.fsLoaded = food;
+      })
+  
     });
+
+
+
+    console.log(this.fsLoaded);
   }
 
   ionViewDidEnter(){
-    this.showMap(this.loaded.loc);
+    this.showMap(this.umnPos);
   }
-  
+
+  back(){
+    this.navCtrl.back();
+  }
+
   showMap(pos:any){
     const location = new google.maps.LatLng(pos.lat,pos.lng);
-    console.log(pos);
     const options = {
       center:location,
-      zoom:15,
+      zoom:20,
       disableDefaultUI:true
     };
     this.map = new google.maps.Map(this.mapRef.nativeElement,options);
+
     //Marker
+
     const marker = new google.maps.Marker({
-      position: this.loaded.loc,
-      map :this.map
+      position:this.umnPos,
+      map:this.map,
     });
   }
 

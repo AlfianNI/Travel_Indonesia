@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MainService } from './main.service';
 import { pulau } from './pulau';
 
@@ -9,9 +10,11 @@ import { pulau } from './pulau';
 })
 export class HomePage implements OnInit {
   pulau:pulau[];
+  private fsPulau:Observable<pulau[]>
   constructor(private pulauSrv:MainService) {}
 
   ngOnInit(){
     this.pulau = this.pulauSrv.getAllPulau();
+    this.fsPulau = this.pulauSrv.listPulau();
   }
 }

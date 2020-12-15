@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { MainService } from 'src/app/home/main.service';
-import { provinsi } from 'src/app/home/pulau';
+import { food, provinsi } from 'src/app/home/pulau';
 
 @Component({
   selector: 'app-foods',
@@ -9,18 +11,28 @@ import { provinsi } from 'src/app/home/pulau';
   styleUrls: ['./foods.page.scss'],
 })
 export class FoodsPage implements OnInit {
-  loaded;
-  food;
-  constructor(private mainSrv:MainService,private activatedRoute:ActivatedRoute,private router:Router) { }
+  private fsFoods:Observable<food[]>;
+  fsLoaded:provinsi;
+  constructor(private activatedRoute: ActivatedRoute,private mainSrv: MainService,private navCtrl:NavController) { }
 
   ngOnInit() {
+    this.fsFoods = this.mainSrv.listFood();
+
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('provId')){return;}
       const id = paramMap.get('provId');
-      this.loaded = this.mainSrv.getProv(id);
-      this.food = this.mainSrv.getAllFoods();
+      this.mainSrv.listaProv(id).subscribe(prov=>{
+        this.fsLoaded = prov;
+      })
   
     });
+
+    console.log(this.fsLoaded);
+    console.log(this.fsFoods);
+  }
+
+  back(){
+    this.navCtrl.back();
   }
 
 }

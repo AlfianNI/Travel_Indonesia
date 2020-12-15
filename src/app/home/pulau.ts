@@ -1,39 +1,52 @@
 export interface pulau {
-    id?:any;
-    pulauId:string;
-    nama:string;
+    id?:string;
+    pulauId: string
+    nama: string;
+    imgUrl: string;
     //provinsi:provinsi[];
 
 }
-export interface provinsi{
-    pulauId:string;
-    provId:string;
-    nama:string;
-    desc:string;
+export interface provinsi {
+    id?:string;
+    pulauId: string;
+    provId: string;
+    nama: string;
+    desc: string;
+    imageUrl: string;
     //food:food[];
     //attraction:attraction[];
     //arts:arts[];
 }
-export interface food{
-    fId:string;
-    provId:string;
-    nama:string;
-    desc:string;
-    loc:loc;
+export interface food {
+    id?:string;
+    provId: string;
+    nama: string;
+    desc: string;
+    imgUrl:string;
+    lat:number;
+    lng:number;
+    //  imageUrl: string;
 }
-export interface attraction{
-    aId:string;
-    provId:string;
-    nama:string;
-    desc:string;
+export interface attraction {
+    id?:string;
+    provId: string;
+    nama: string;
+    desc: string;
+    imgUrl:string;
+    lat:number;
+    lng:number;
+    //   imageUrl: string;
 }
-export interface arts{
-    provId:string;
-    nama:string;
-    desc:string;
+export interface arts {
+    id?:string;
+    provId: string;
+    nama: string;
+    desc: string;
+    imgUrl:string;
+    //  imageUrl: string;
 }
 
-export interface loc{
-lat:number;
-lng:number;
+export interface loca{
+    lat:number;
+    lng:number;
 }

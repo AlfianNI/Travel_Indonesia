@@ -3,30 +3,33 @@
         <ion-buttons slot="start">
             <ion-back-button (click)="toHome()"></ion-back-button>
         </ion-buttons>
-
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-title>Discover {{loaded.nama}}</ion-title>
+<ion-content *ngIf="fsLoaded">
+    <p>Discover {{fsLoaded.nama}}</p>
     <ion-searchbar placeholder="Find out Your Destination"></ion-searchbar>
-    <ion-title>By Provinces</ion-title>
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false}">
-        <ion-slide *ngFor="let prov of prov" style="width: 150px; height: 400px; border: 2px solid #f8f8f8">
-            <ion-col *ngIf="prov.pulauId.includes(loaded.pulauId)" style="border-radius: 25px;">
-                <ion-button expand="full" [routerLink]="['./',prov.provId]">{{ prov.nama }}</ion-button>
-                <ion-img style="pointer-events:none;width: 150px;height: 350px;" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
-            </ion-col>
+    <p>By Provinces</p>
+    <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let prov of (fsProv|async)">
+            <ion-card *ngIf="prov.pulauId.includes(fsLoaded.pulauId)" [routerLink]="['./',prov.provId]">
+                <ion-card-content>
+                    <ion-img [src]="prov.imageUrl" style="pointer-events: none;"> </ion-img>
+                    {{prov.nama}}
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
     </ion-slides>
-    <ion-title>Popular Attraction</ion-title>
-    <ion-title>See Beauty on Another Island</ion-title>
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false}">
-        <ion-slide *ngFor="let pulau of pulau" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
-            <ion-col style="border-radius: 25px;">
-                <ion-button expand="full" (click)="movePulau(pulau)">{{ pulau.nama }}</ion-button>
-                <ion-img style="pointer-events:none;border-radius: 25px;" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
-            </ion-col>
+    <p>Popular Attraction</p>
+    <p>See Beauty on Another Island</p>
+    <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let pulau of (fsPulau|async)" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
+            <ion-card (click)="toPulau(pulau)">
+                <ion-card-content>
+                    <ion-img [src]="pulau.imgUrl" style="pointer-events: none;"> </ion-img>
+                    {{pulau.nama}}
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
     </ion-slides>
 </ion-content>

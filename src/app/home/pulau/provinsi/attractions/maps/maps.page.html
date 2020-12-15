@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>maps</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button (click)="back()"></ion-back-button>
+        </ion-buttons>
+        <ion-title *ngIf="fsLoaded">Lokasi {{fsLoaded.nama}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content expand="full">
+    <div #map id="map"></div>
 </ion-content>

@@ -1,21 +1,25 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/home/./."></ion-back-button>
+            <ion-back-button (click)="back()"></ion-back-button>
         </ion-buttons>
         <ion-title>Regional Arts</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-list *ngFor="let arts of arts">
-        <ion-item *ngIf="arts.provId.includes(loaded.provId)">
-            <ion-title>
-                {{arts.nama}}
-            </ion-title>
-            <ion-text class="item-text-wrap">
+<ion-content *ngIf="fsLoaded">
+    <ion-list *ngFor="let arts of (fsArts|async)">
+        <ion-card *ngIf="arts.provId.includes(fsLoaded.provId)">
+            <ion-item>
+                <ion-img [src]="arts.imgUrl"></ion-img>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{arts.nama}}</ion-label>
+            </ion-item>
+
+            <ion-card-content>
                 {{arts.desc}}
-            </ion-text>
-        </ion-item>
+            </ion-card-content>
+        </ion-card>
     </ion-list>
 </ion-content>

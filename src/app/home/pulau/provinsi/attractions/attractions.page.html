@@ -1,21 +1,12 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/home/./."></ion-back-button>
+            <ion-back-button (click)="back()"></ion-back-button>
         </ion-buttons>
         <ion-title>Tourist Attractions</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list *ngFor="let attr of attraction">
-        <ion-item *ngIf="attr.provId.includes(loaded.provId)">
-            <ion-title>
-                {{attr.nama}}
-            </ion-title>
-            <ion-text class="item-text-wrap">
-                {{attr.desc}}
-            </ion-text>
-        </ion-item>
-    </ion-list>
+
 </ion-content>

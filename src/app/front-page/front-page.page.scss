@@ -1,0 +1,33 @@
+.text{
+   position: absolute;
+width: 279px;
+height: 110px;
+left: 48px;
+top: 101px;
+
+font-family: Ubuntu;
+font-style: normal;
+font-weight: 300;
+font-size: 48px;
+line-height: 55px;
+text-align: center;
+
+color: #E8D26D;
+}
+
+.button{
+
+position: absolute;
+width: 120px;
+height: 45px;
+left: 127px;
+top: 265px;
+
+background: #F79561;
+border-radius: 20px;
+
+}
+
+ion-content.background{
+  --background: url(../../assets/frontpage.png)
+}

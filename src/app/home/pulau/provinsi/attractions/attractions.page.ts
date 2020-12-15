@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { MainService } from 'src/app/home/main.service';
+import { attraction, provinsi } from 'src/app/home/pulau';
 
 @Component({
   selector: 'app-attractions',
@@ -8,19 +11,23 @@ import { MainService } from 'src/app/home/main.service';
   styleUrls: ['./attractions.page.scss'],
 })
 export class AttractionsPage implements OnInit {
-
-  loaded;
-  attraction;
-  constructor(private mainSrv:MainService,private activatedRoute:ActivatedRoute,private router:Router) { }
+  private fsAttract:Observable<attraction[]>;
+  fsLoaded:provinsi;
+  constructor(private activatedRoute: ActivatedRoute,private mainSrv: MainService,private navCtrl:NavController) { }
 
   ngOnInit() {
+    this.fsAttract = this.mainSrv.listAttraction();
+
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('provId')){return;}
       const id = paramMap.get('provId');
-      this.loaded = this.mainSrv.getProv(id);
-      this.attraction = this.mainSrv.getAllAttraction();
+      this.mainSrv.listaProv(id).subscribe(prov=>{
+        this.fsLoaded = prov;
+      })
   
     });
   }
-
+  back(){
+    this.navCtrl.back();
+  }
 }

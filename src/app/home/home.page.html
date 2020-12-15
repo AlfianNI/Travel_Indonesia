@@ -1,9 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
 
-    <ion-content [fullscreen]="true">
-        <p>As the Largest archipelagic country in the world. Indonesia is blessed with so many differen people, cultures, custom, traditions, artworks, food, animals, plants and landscapes</p>
-        <ion-title>Where Are You Going?</ion-title>
-        <ion-list>
-            <ion-button *ngFor="let pulau of pulau" [routerLink]="['./',pulau.pulauId]">{{pulau.nama}}</ion-button>
-        </ion-list>
-    </ion-content>
+</ion-header>
+
+<ion-content>
+    <div class="div1">
+        <p class="text">
+            As the largest archipelagic country in the world, Indonesia is blessed with so many different people, cultures, customs, traditions, artworks, food, animals, plants and landscapes
+        </p>
+        <img class="responsive" src="../../assets/home.png">
+    </div>
+
+    <div>
+        <p style="text-align:center">Where are you going?</p>
+        <ion-grid>
+            <ion-row>
+                <ng-container *ngFor="let pulau of (fsPulau|async)">
+                    <ion-col size="6">
+                        <ion-img class="image" [src]="pulau.imgUrl" [routerLink]="['./',pulau.pulauId]"> </ion-img>
+                        <ion-label>
+                            <p style="text-align:center"> {{ pulau.nama }}</p>
+                        </ion-label>
+                    </ion-col>
+                </ng-container>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>
+
+<!--
+<ion-tabs>
+  <ion-tab-bar slot="button">
+    <ion-tab-button tab="speakers">
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-label>Favorite</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="map">
+      <ion-icon name="map"></ion-icon>
+      <ion-label>Map</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+-->

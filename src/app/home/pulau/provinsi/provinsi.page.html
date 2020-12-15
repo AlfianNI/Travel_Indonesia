@@ -3,45 +3,57 @@
         <ion-buttons slot="start">
             <ion-back-button (click)="toPulau()"></ion-back-button>
         </ion-buttons>
-
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-title>What's On {{loaded.nama}}</ion-title>
-    <ion-card>{{loaded.desc}}</ion-card>
+<ion-content *ngIf="fsLoaded">
+    <p style="text-align:center">What's On {{fsLoaded.nama}} ?</p>
+    <ion-card>
+        <ion-img [src]="fsLoaded.imageUrl"> </ion-img>
+        <ion-card-content>
+            {{fsLoaded.desc}}
+        </ion-card-content>
+    </ion-card>
+
     <ion-grid>
         <ion-row>
-            <ion-col>
-                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px;" routerLink="./foods">
-                    Foods
-                </ion-button>
-            </ion-col>
-            <ion-col>
-                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px" routerLink="./attractions">
-                    Places
-                </ion-button>
-            </ion-col>
-            <ion-col>
-                <ion-button style="align-items: center; width: 150px; height: 150px; border: 2px" routerLink="./arts">
-                    Arts
-                </ion-button>
-            </ion-col>
+            <ng-container>
+                <ion-col size="4">
+                    <img src="../../../assets/foods.png" routerLink="./foods">
+                    <ion-label>
+                        Foods
+                    </ion-label>
+                </ion-col>
+                <ion-col size="4">
+                    <img src="../../../assets/places.png" routerLink="./attractions">
+                    <ion-label>
+                        Places
+                    </ion-label>
+                </ion-col>
+                <ion-col size="4">
+                    <img src="../../../assets/arts.png" routerLink="./arts">
+                    <ion-label>
+                        Arts
+                    </ion-label>
+                </ion-col>
+            </ng-container>
         </ion-row>
     </ion-grid>
 
+    <p>
 
-
-
-    <ion-title>
         Discover More
-    </ion-title>
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false}">
-        <ion-slide *ngFor="let prov of prov" style="width: 150px; height: 400px; border: 2px solid #f8f8f8">
-            <ion-col *ngIf="prov.pulauId.includes(loaded.pulauId)">
-                <ion-button expand="full" (click)="moveProv(prov.provId)">{{ prov.nama }}</ion-button>
-                <ion-img expand="full" style="width: 150px;height: 350px;pointer-events:none" src="https://atlas-content-cdn.pixelsquid.com/stock-images/black-and-white-globe-shape-PxlzYO7-600.jpg"></ion-img>
-            </ion-col>
+    </p>
+
+    <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let prov of (fsProv|async)" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
+            <ion-card (click)="moveProv(prov)" *ngIf="prov.pulauId.includes(fsLoaded.pulauId)">
+                <ion-card-content>
+                    <ion-img [src]="prov.imageUrl" style="pointer-events: none;"> </ion-img>
+                    {{prov.nama}}
+                </ion-card-content>
+            </ion-card>
         </ion-slide>
     </ion-slides>
+
 </ion-content>

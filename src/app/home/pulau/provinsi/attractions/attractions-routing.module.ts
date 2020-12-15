@@ -7,11 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AttractionsPage
-  },
-  {
+  },  {
     path: 'maps',
     loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
   }
+
 ];
 
 @NgModule({
