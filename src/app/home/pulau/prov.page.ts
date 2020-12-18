@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MainService } from '../main.service';
-import { provinsi, pulau } from '../pulau';
+import { popular, provinsi, pulau } from '../pulau';
 
 @Component({
   selector: 'app-prov',
@@ -16,6 +16,7 @@ export class ProvPage implements OnInit {
   pulau: pulau[];
   private fsPulau:Observable<pulau[]>;
   private fsProv:Observable<provinsi[]>;
+  private fsPopular:Observable<popular[]>;
   constructor(
     private activatedRoute: ActivatedRoute,
     private mainSrv: MainService,
@@ -24,12 +25,12 @@ export class ProvPage implements OnInit {
 
   ngOnInit() {
     this.fsPulau = this.mainSrv.listPulau();
-    this.fsProv = this.mainSrv.listProv()
+    this.fsProv = this.mainSrv.listProv();
+    this.fsPopular = this.mainSrv.listPopular();
     
     this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('pulauId')) { return; }
       const id = paramMap.get('pulauId');
-      this.loaded = this.mainSrv.getPulau(id);
       this.mainSrv.listaPulau(id).subscribe(pulau => {
         this.fsLoaded = pulau;
       })

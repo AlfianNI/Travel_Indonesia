@@ -21,15 +21,30 @@
         </ion-slide>
     </ion-slides>
     <p>Popular Attraction</p>
-    <p>See Beauty on Another Island</p>
-    <ion-slides [options]="sliderConfig">
-        <ion-slide *ngFor="let pulau of (fsPulau|async)" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
-            <ion-card (click)="toPulau(pulau)">
+    <ion-content>
+        <ion-list *ngFor="let popular of (fsPopular|async)">
+            <ion-card *ngIf="popular.pulauId.includes(fsLoaded.pulauId)">
+                <ion-item>
+                    <ion-img [src]="popular.imgUrl"></ion-img>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{popular.nama}}</ion-label>
+                </ion-item>
+
                 <ion-card-content>
-                    <ion-img [src]="pulau.imgUrl" style="pointer-events: none;"> </ion-img>
-                    {{pulau.nama}}
+                    {{popular.desc}}
                 </ion-card-content>
             </ion-card>
-        </ion-slide>
-    </ion-slides>
-</ion-content>
+        </ion-list>
+        <p>See Beauty on Another Island</p>
+        <ion-slides [options]="sliderConfig">
+            <ion-slide *ngFor="let pulau of (fsPulau|async)" style="width: 150px; height: 200px; border: 2px solid #f8f8f8">
+                <ion-card (click)="toPulau(pulau)">
+                    <ion-card-content>
+                        <ion-img [src]="pulau.imgUrl" style="pointer-events: none;"> </ion-img>
+                        {{pulau.nama}}
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-content>

@@ -16,7 +16,7 @@ export class MapsPage implements OnInit {
   map:any;
   loca:loca;
   @ViewChild('map',{read:ElementRef,static:false}) mapRef:ElementRef;
-  umnPos:loca = {
+  Pos:loca = {
     lat:5.8911067,
     lng:95.3207733
   };
@@ -34,20 +34,11 @@ export class MapsPage implements OnInit {
       })
   
     });
-
-
-
     console.log(this.fsLoaded);
   }
-
   ionViewDidEnter(){
-    this.showMap(this.umnPos);
+    this.showMap(this.Pos);
   }
-
-  back(){
-    this.navCtrl.back();
-  }
-
   showMap(pos:any){
     const location = new google.maps.LatLng(pos.lat,pos.lng);
     const options = {
@@ -56,13 +47,15 @@ export class MapsPage implements OnInit {
       disableDefaultUI:true
     };
     this.map = new google.maps.Map(this.mapRef.nativeElement,options);
-
     //Marker
-
     const marker = new google.maps.Marker({
-      position:this.umnPos,
+      position:this.Pos,
       map:this.map,
     });
+  }
+
+  back(){
+    this.navCtrl.back();
   }
 
 }

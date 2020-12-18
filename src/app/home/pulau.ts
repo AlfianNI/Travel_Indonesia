@@ -50,3 +50,11 @@ export interface loca{
     lat:number;
     lng:number;
 }
+
+export interface popular{
+    id?:string;
+    pulauId:string;
+    nama:string;
+    desc:string;
+    imgUrl:string;
+}
