@@ -7,8 +7,6 @@
 </ion-header>
 
 <ion-content *ngIf="fsLoaded">
-    <p>Discover {{fsLoaded.nama}}</p>
-    <ion-searchbar placeholder="Find out Your Destination"></ion-searchbar>
     <p>By Provinces</p>
     <ion-slides [options]="sliderConfig">
         <ion-slide *ngFor="let prov of (fsProv|async)">
