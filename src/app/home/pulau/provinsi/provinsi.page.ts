@@ -22,7 +22,6 @@ export class ProvinsiPage implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('provId')){return;}
       const id = paramMap.get('provId');
-      this.loaded = this.mainSrv.getProv(id);
       this.mainSrv.listaProv(id).subscribe(prov=>{
         this.fsLoaded = prov;
       })

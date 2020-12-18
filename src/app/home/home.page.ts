@@ -14,7 +14,6 @@ export class HomePage implements OnInit {
   constructor(private pulauSrv:MainService) {}
 
   ngOnInit(){
-    this.pulau = this.pulauSrv.getAllPulau();
     this.fsPulau = this.pulauSrv.listPulau();
   }
 }
