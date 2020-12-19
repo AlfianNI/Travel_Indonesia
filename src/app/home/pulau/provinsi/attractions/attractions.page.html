@@ -7,6 +7,20 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="fsLoaded">
+    <ion-list *ngFor="let attr of (fsAttract|async)">
+        <ion-card *ngIf="attr.provId.includes(fsLoaded.provId)">
+            <ion-item>
+                <ion-img [src]="attr.imgUrl"></ion-img>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{attr.nama}}</ion-label>
+                <ion-button fill="outline" slot="end" [routerLink]="[attr.id]">Location</ion-button>
+            </ion-item>
 
+            <ion-card-content>
+                {{attr.desc}}
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
 </ion-content>
