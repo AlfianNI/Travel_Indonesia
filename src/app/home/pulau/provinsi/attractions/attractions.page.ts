@@ -19,8 +19,8 @@ export class AttractionsPage implements OnInit {
     this.fsAttract = this.mainSrv.listAttraction();
 
     this.activatedRoute.paramMap.subscribe(paramMap=>{
-      if(!paramMap.has('provId')){return;}
-      const id = paramMap.get('provId');
+      if(!paramMap.has('attId')){return;}
+      const id = paramMap.get('attId');
       this.mainSrv.listaProv(id).subscribe(prov=>{
         this.fsLoaded = prov;
       })
