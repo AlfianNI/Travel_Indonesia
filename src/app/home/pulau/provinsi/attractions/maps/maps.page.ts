@@ -27,8 +27,8 @@ export class MapsPage implements OnInit {
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('fId');
     this.activatedRoute.paramMap.subscribe(paramMap=>{
-      if(!paramMap.has('fId')){return;}
-      const id = paramMap.get('fId');
+      if(!paramMap.has('attrId')){return;}
+      const id = paramMap.get('attId');
       this.mainSrv.listaFood(id).subscribe(food=>{
         this.fsLoaded = food;
       })
